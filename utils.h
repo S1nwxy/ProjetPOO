@@ -3,15 +3,29 @@
 #include <string>
 using namespace std;
 
-enum CommandType{
-    fd,
-    turn,
-    repeat
+vector<string> CommandType = 
+{
+    "fd",
+    "turn",
+    "repeat",
+    "clear"
+    // add the rest later
 };
 
+vector<string> CommandWithContent = 
+{
+    "fd",
+    "turn",
+    "repeat"
+    // add the rest later
+};
+
+
 struct Command{
-    CommandType c;
+    string command;
     string content;
 };
 
-// vector<Command> parse(string command);
+vector<Command> parse(string command);
+string deloop(string command);
+vector<string> vectorize(string command);

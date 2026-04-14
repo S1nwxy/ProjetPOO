@@ -11,7 +11,7 @@ class Turtle{
 
 
     public:
-    Turtle(SvgDrawer * drawer, double x = 0, double y = 0, double angle = 0, bool active); //origin is 0,0 for now but it will change in the future
+    Turtle(SvgDrawer * drawer, double x = 0, double y = 0, double angle = 0, bool active = true); //origin is 0,0 for now but it will change in the future
     ~Turtle(){delete drawer_;};
     double x(){return x_;};
     double y(){return y_;};

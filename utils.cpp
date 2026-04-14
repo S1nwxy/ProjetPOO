@@ -1,22 +1,74 @@
 #include "utils.h"
+#include <algorithm>
+using namespace std;
 
 
-/*
+
 vector<Command> parse(string command){
-    string temp_cmd;
-    int temp_cmd_index;
-    string temp_content;
-    int temp_cmd_index;
-    bool cmd;
-    for(int i = 0;  i < command.length(); i++){
-        if(command[i] != ' '){
-            temp_cmd[temp_cmd_index] = command[i];
-            temp_cmd_index++;
+    string delooped_command = deloop(command);
+    vector<string> vectorized_command = vectorize(delooped_command);
+    vector<Command> commands;
+    Command temp;
+    for(auto it = vectorized_command.begin(); it != vectorized_command.end(); ++it){
+        temp.command = *it;
+        if(find(CommandWithContent.begin(), CommandWithContent.end(), *it) != CommandWithContent.end()){
+            it++;
+            temp.content = *it;
         } else {
-            if(temp_cmd == "fd"){
+            temp.content = "null";
+        }
+        commands.push_back(temp);
+    }
+    return commands;
+}
 
+// fd 10 repeat 4 [ repeat 7 [ ] ];
+
+string deloop(string command){ // this function removes repeats and puts them in plaintext
+    int i;
+    string temp;
+    string delooped;
+    while(command[i] != '\0'){ //do the whole string
+        if(command[i] != ' '){ // dont add spaces to word commands
+            temp += command[i]; 
+        } else { // if its a space we have a whole word
+            if(temp != "repeat"){ // +add debugging for invalid words
+                delooped += temp; // add the word
+                delooped += ' '; // add a space
+            } else { // its repeat 
+                string amount_str; // get the repeat command
+                while(command[i] != '['){ // get the amount of repeats
+                    if(command[i] != ' '){ //dont get spaces
+                        amount_str += command[i];
+                    }
+                    i++;
+                }
+                i++; // start after the first "["
+                string repeated_command;
+                while(command[i] != ']'){ // end after "]"
+                    repeated_command += command[i]; // get the whole bracketed command
+                    i++;
+                }
+                for(int j = 0; j < stoi(amount_str); j++){ // add the command x times
+                    delooped.append(deloop(repeated_command)); // recursively add delooped commands
+                    delooped += ' '; // may cause bugs,  not sure
+                }
             }
         }
+        i++;
     }
+    return delooped;
 }
-*/
+
+vector<string> vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
+    vector<string> vectorized;
+    for(int i = 0; i < command.length(); i++){ // mid-word
+        string temp = "";
+        if(command[i] != ' '){
+            temp += command[i];
+        } else { // end of word
+            vectorized.push_back(temp);
+        }
+    }
+    return vectorized;
+}
