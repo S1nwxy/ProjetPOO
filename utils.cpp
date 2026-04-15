@@ -2,7 +2,22 @@
 #include <algorithm>
 using namespace std;
 
+vector<string> CommandType = 
+{
+    "fd",
+    "turn",
+    "repeat",
+    "clear"
+    // add the rest later
+};
 
+vector<string> CommandWithContent = 
+{
+    "fd",
+    "turn",
+    "repeat"
+    // add the rest later
+};
 
 vector<Command> parse(string command){
     string delooped_command = deloop(command);
@@ -25,7 +40,7 @@ vector<Command> parse(string command){
 // fd 10 repeat 4 [ repeat 7 [ ] ];
 
 string deloop(string command){ // this function removes repeats and puts them in plaintext
-    int i;
+    int i = 0;
     string temp;
     string delooped;
     while(command[i] != '\0'){ //do the whole string
@@ -35,6 +50,7 @@ string deloop(string command){ // this function removes repeats and puts them in
             if(temp != "repeat"){ // +add debugging for invalid words
                 delooped += temp; // add the word
                 delooped += ' '; // add a space
+                temp.clear();
             } else { // its repeat 
                 string amount_str; // get the repeat command
                 while(command[i] != '['){ // get the amount of repeats
@@ -57,6 +73,7 @@ string deloop(string command){ // this function removes repeats and puts them in
         }
         i++;
     }
+    delooped += temp;
     return delooped;
 }
 
