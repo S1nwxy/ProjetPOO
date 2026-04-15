@@ -3,11 +3,12 @@
 #include "menu.h"
 #include "menuoption.h"
 #include "menuaction.h"
+#include "utils.h"
 #include <string>
+#include <iostream>
 
 int main(){
-    SvgDrawer * d = new SvgDrawer("drawing", 1920, 1080);
-    Turtle t = Turtle(d);
+    std::string test = "fd 10 repeat 2 [turn 10 repeat 2 [turn -15]] clear";
+    std::cout << deloop(test);
     return 0;
-    delete d; // should delete itself
 }

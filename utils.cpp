@@ -2,7 +2,22 @@
 #include <algorithm>
 using namespace std;
 
+vector<string> CommandType = 
+{
+    "fd",
+    "turn",
+    "repeat",
+    "clear"
+    // add the rest later
+};
 
+vector<string> CommandWithContent = 
+{
+    "fd",
+    "turn",
+    "repeat"
+    // add the rest later
+};
 
 vector<Command> parse(string command){
     string delooped_command = deloop(command);
