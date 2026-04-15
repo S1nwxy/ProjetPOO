@@ -20,6 +20,7 @@ vector<string> CommandWithContent =
 };
 
 vector<Command> parse(string command){
+    bool validCommand = commandIsValid(command);
     string delooped_command = deloop(command);
     vector<string> vectorized_command = vectorize(delooped_command);
     vector<Command> commands;
@@ -68,15 +69,11 @@ string deloop(string command){ // this function removes repeats and puts them in
                     i++;
                 }
                 if(i < command.length()) i++; // skip the closing bracket
-                if(!amount_str.empty()){
-                    try {
-                        int repeat_count = stoi(amount_str);
-                        for(int j = 0; j < repeat_count; j++){ // add the command x times
-                            delooped.append(deloop(repeated_command)); // recursively add delooped commands
-                            delooped += ' '; // may cause bugs,  not sure
-                        }
-                    } catch(...) {
-                        // Invalid repeat count, skip
+                if(!amount_str.empty()){ // incase repeat doesnt have an amount
+                    int repeat_count = stoi(amount_str);
+                    for(int j = 0; j < repeat_count; j++){ // add the command x times
+                        delooped.append(deloop(repeated_command)); // recursively add delooped commands
+                        delooped += ' '; // may cause bugs,  not sure
                     }
                 }
                 continue; // skip the i++ at the end of the main loop
@@ -105,4 +102,8 @@ vector<string> vectorize(string command){ // this command turns a string of inst
         vectorized.push_back(temp);
     }
     return vectorized;
+}
+
+bool commandIsValid(string command){
+    return true;
 }
