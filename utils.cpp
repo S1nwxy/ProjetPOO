@@ -40,7 +40,7 @@ vector<Command> parse(string command){
 // fd 10 repeat 4 [ repeat 7 [ ] ];
 
 string deloop(string command){ // this function removes repeats and puts them in plaintext
-    int i;
+    int i = 0;
     string temp;
     string delooped;
     while(command[i] != '\0'){ //do the whole string
@@ -50,6 +50,7 @@ string deloop(string command){ // this function removes repeats and puts them in
             if(temp != "repeat"){ // +add debugging for invalid words
                 delooped += temp; // add the word
                 delooped += ' '; // add a space
+                temp.clear();
             } else { // its repeat 
                 string amount_str; // get the repeat command
                 while(command[i] != '['){ // get the amount of repeats
@@ -72,12 +73,13 @@ string deloop(string command){ // this function removes repeats and puts them in
         }
         i++;
     }
+    delooped += temp;
     return delooped;
 }
 
 vector<string> vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
     vector<string> vectorized;
-    for(int i = 0; i < command.length(); i++){ // mid-word
+    for(size_t i = 0; i < command.length(); i++){ // mid-word
         string temp = "";
         if(command[i] != ' '){
             temp += command[i];
