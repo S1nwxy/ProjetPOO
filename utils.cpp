@@ -50,7 +50,7 @@ string deloop(string command){ // this function removes repeats and puts them in
                 delooped += temp; // add the word
                 delooped += ' '; // add a space
                 temp.clear();
-            } else { // its repeat
+            } else { // its repeat 
                 temp.clear();
                 string amount_str; // get the repeat command
                 while(i < command.length() && command[i] != '['){ // get the amount of repeats
