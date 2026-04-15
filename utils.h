@@ -14,3 +14,4 @@ string deloop(string command);
 vector<string> vectorize(string command);
 
 bool commandIsValid(string command); //check bracketing, valid words, etc
+

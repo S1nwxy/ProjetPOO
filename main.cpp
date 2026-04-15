@@ -1,11 +1,13 @@
+#include <string>
+#include <iostream>
 #include "turtle.h"
 #include "svgdrawer.h"
 #include "menu.h"
 #include "menuoption.h"
 #include "menuaction.h"
 #include "utils.h"
-#include <string>
-#include <iostream>
+
+using namespace std;
 
 int main(){
     std::string test1 = "fd 10 turn 20 ";
