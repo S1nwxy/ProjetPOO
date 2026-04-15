@@ -37,13 +37,11 @@ vector<Command> parse(string command){
     return commands;
 }
 
-// fd 10 repeat 4 [ repeat 7 [ ] ];
-
 string deloop(string command){ // this function removes repeats and puts them in plaintext
     int i = 0;
     string temp;
     string delooped;
-    while(command[i] != '\0'){ //do the whole string
+    while(i < command.length()){ //do the whole string
         if(command[i] != ' '){ // dont add spaces to word commands
             temp += command[i]; 
         } else { // if its a space we have a whole word
@@ -52,6 +50,7 @@ string deloop(string command){ // this function removes repeats and puts them in
                 delooped += ' '; // add a space
                 temp.clear();
             } else { // its repeat 
+                temp.clear();
                 string amount_str; // get the repeat command
                 while(command[i] != '['){ // get the amount of repeats
                     if(command[i] != ' '){ //dont get spaces
