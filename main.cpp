@@ -10,10 +10,28 @@
 using namespace std;
 
 int main(){
-    SvgDrawer * d = new SvgDrawer("drawing", 1920, 1080);
-    Turtle t = Turtle(d);
-    string command = "repeat 2 [repeat 2 [fd 100]]";
-    std::cout << deloop(command);
+    std::string test1 = "fd 10 turn 20 ";
+    std::string test2 = "fd 10 repeat 2 [turn 10] clear"; // fd 10 turn 10 turn 10 clear
+    std::string test3 = "fd 10 repeat 2 [turn 10 repeat 2 [fd -5] turn -5] clear";
+    // fd 10 (turn 10 fd -5 fd -5 turn -5) turn 10 fd -5 fd -5 turn -5 clear
+    std::cout << deloop(test1) << endl;
+    std::cout << deloop(test2) << endl;
+    std::cout << deloop(test3) << endl;
+    vector<string> test1vec = vectorize(deloop(test1));
+    vector<string> test2vec = vectorize(deloop(test2));
+    vector<string> test3vec = vectorize(deloop(test3));
+    cout << endl;
+    for(string it:test1vec){
+        cout << it << ' ';
+    }
+    cout << endl;
+    for(string it:test2vec){
+        cout << it << ' ';
+    }
+    cout << endl;
+    for(string it:test3vec){
+        cout << it << ' ';
+    }
+    cout << endl;
     return 0;
-    delete d; // should delete itself
 }
