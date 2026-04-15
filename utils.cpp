@@ -79,7 +79,7 @@ string deloop(string command){ // this function removes repeats and puts them in
 
 vector<string> vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
     vector<string> vectorized;
-    for(int i = 0; i < command.length(); i++){ // mid-word
+    for(size_t i = 0; i < command.length(); i++){ // mid-word
         string temp = "";
         if(command[i] != ' '){
             temp += command[i];
