@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "menu.h"
+#include "svgdrawer.h"
 
 struct CommandHelp {
     std::string name;
@@ -11,6 +12,7 @@ struct CommandHelp {
 
 class MenuLogo : public Menu {
     std::string program_;
+    SvgDrawer * drawer_;
 
 public:
     MenuLogo();
