@@ -1,7 +1,8 @@
 #pragma once
 
-#include "menu.h"
+#include <string>
 #include <vector>
+#include "menu.h"
 
 struct CommandHelp {
     std::string name;
@@ -9,7 +10,8 @@ struct CommandHelp {
 };
 
 class MenuLogo : public Menu {
-    // bool isSubMenu;
+    std::string program_;
+
 public:
     MenuLogo();
 
@@ -17,4 +19,5 @@ public:
     void printHelp(const std::vector<CommandHelp>& commands, int colWidth = 26) const;
 
     bool newProgram(int);
+    bool executeProgram(int);
 };

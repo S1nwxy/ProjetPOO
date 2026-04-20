@@ -23,8 +23,10 @@ std::vector<CommandHelp> commands = {
 };
 
 MenuLogo::MenuLogo() : Menu("Main Menu") {
-    addOption(new MenuAction<MenuLogo>("Enter new Logo program",
-                                       &MenuLogo::newProgram));
+    program_ = "";
+    addOption(new MenuAction<MenuLogo>("Enter new Logo program", &MenuLogo::newProgram));
+
+    addOption(new MenuAction<MenuLogo>("Execute the Logo program", &MenuLogo::executeProgram));
 }
 
 void MenuLogo::print() const {
@@ -34,35 +36,45 @@ void MenuLogo::print() const {
 }
 
 void MenuLogo::printHelp(const std::vector<CommandHelp>& commands, int colWidth) const {
-    std::cout << std::left
-              << std::setw(colWidth) << "Command"
-              << "Description\n"
-              << std::string(colWidth + 30, '-') << "\n";
+    cout << left
+         << setw(colWidth) << "Command"
+         << "Description" << endl
+         << string(colWidth + 30, '-') << endl;
 
     for (const auto& cmd : commands) {
         for (size_t i = 0; i < cmd.description.size(); ++i) {
             if (i == 0)
-                std::cout << std::setw(colWidth) << cmd.name;
+                cout << setw(colWidth) << cmd.name;
             else
-                std::cout << std::setw(colWidth) << ""; // colonne gauche vide
-            std::cout << cmd.description[i] << "\n";
+                cout << setw(colWidth) << ""; // colonne gauche vide
+            cout << cmd.description[i] << endl;
         }
-        std::cout << "\n"; // ligne vide entre les commandes
+        cout << endl; // ligne vide entre les commandes
     }
 }
 
 
 bool MenuLogo::newProgram(int) {
-    string program;
     printHelp(commands);
     cout << "Enter your program : " << endl;
-    getline(cin, program);
+    getline(cin, program_);
 
-#ifdef test
-    cout << deloop(program);
+    return false;
+}
+
+bool MenuLogo::executeProgram(int) {
+    cout << "Delooped Program" << endl;
+    string deloopedProgram = deloop(program_);
+    cout << deloopedProgram << endl;
+
+    cout << "Vectorized Program" << endl;
+    vector<string> vectorizedProgram = vectorize(deloopedProgram);
+    int i = 1;
+    for (string str: vectorizedProgram) {
+        cout << i << " " + str + " ";
+        i++;
+    }
     cout << endl;
-    pauseConsole();
-#endif
 
     return false;
 }
