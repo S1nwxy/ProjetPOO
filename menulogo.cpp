@@ -1,11 +1,12 @@
-#include "menulogo.h"
-#include "menu.h"
-#include "menuaction.h"
-#include "utils.h"
 #include <iomanip>
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include "menu.h"
+#include "menuaction.h"
+#include "menulogo.h"
+#include "svgdrawer.h"
+#include "utils.h"
 
 using namespace std;
 
@@ -24,6 +25,8 @@ std::vector<CommandHelp> commands = {
 
 MenuLogo::MenuLogo() : Menu("Main Menu") {
     program_ = "";
+    drawer_ = new SvgDrawer("logo.html");
+
     addOption(new MenuAction<MenuLogo>("Enter new Logo program", &MenuLogo::newProgram));
 
     addOption(new MenuAction<MenuLogo>("Execute the Logo program", &MenuLogo::executeProgram));
@@ -76,5 +79,8 @@ bool MenuLogo::executeProgram(int) {
     }
     cout << endl;
 
+    drawer_->beginDraw("LOGO");
+    drawer_->drawCircle(100, 100, 75);
+    drawer_->endDraw();
     return false;
 }
