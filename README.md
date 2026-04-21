@@ -1,19 +1,32 @@
-# ProjetPOO
-Projet en Programmation Orientée Objet pour réaliser un interpréteur du langage LOGO
+# Logo programming language interpreter
 
-turtle class (position, orientation, state (drawing or not), color and width maybe)
+This repository is an Object-Oriented Programming school project. The goal is to make a Logo interpreter.
 
-basic commands (step, turn, change state, repeat commands)
+## But what is Logo ?
 
-implémentation de :
-REPETE 3 [AVANCE 100 REPETE 4 [AVANCE 50 TOURNE_DROITE 90] TOURNE_DROITE 120]
+Logo is an old educational programming language developped in 1967. It uses commands to move a cursor, named a turtle, on a screen in order to draw shapes.
 
+For more infos, see :
+- [More about Logo](https://en.wikipedia.org/wiki/Logo_(programming_language))  
+- [A classic implementation for Windows](en.wikipedia.org/wiki/MSWLogo)
+- [An online interpreter to test Logo](https://www.transum.org/software/Logo/) 
 
-fonction parse(string str)
+## Capabilities
 
-parsing de REPETE -> récupération de 3 puis appel récursif parse([...]) 3 fois
--parsing de AVANCE -> récupération de 100 puis turtle.step(100)
--parsing de REPETE -> récupération de 4 puis appel récursif parse([...]) 4 fois
---parsing de AVANCE -> récupération de 50 puis turtle.step(50)
---parsing de TOURNE_DROITE -> récupération de 90 puis turtle.turn(90)
--parsing de TOURNE_DROITE -> récupération de 120 puis turtle.turn(120)
+This simple interpreter allows four basic command : 
+- `fd` : to move forward
+- `turn` : to rotate the turtle either right or left
+- `repeat` : to repeat a subset of commands a certain number of times
+- `clear` : clear the screen (remove the drawings)
+
+Example, drawing a square :
+`repeat 4 [fd 100 rotate -90]`
+
+The interpreter will :
+- "deloop" the whole program. Which means it will detect the "repeat" commands in order to extract each commands the right number of time.
+- vectorize the delooped programm to extract each command and argument alone
+- then parse each of those commands with their associated argument in order to move the turtle and draw the shapes
+
+## Diagram of class (UML)
+
+![diagram of class](UML/UML.png) 
