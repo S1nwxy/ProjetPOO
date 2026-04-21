@@ -2,7 +2,7 @@
 #include <algorithm>
 using namespace std;
 
-vector<string> CommandType = 
+vector<string> CommandList = 
 {
     "fd",
     "turn",
@@ -11,7 +11,7 @@ vector<string> CommandType =
     // add the rest later
 };
 
-vector<string> CommandWithContent = 
+vector<string> CommandWithContentList = 
 {
     "fd",
     "turn",
@@ -19,26 +19,30 @@ vector<string> CommandWithContent =
     // add the rest later
 };
 
-vector<Command> parse(string command){
-    bool validCommand = commandIsValid(command);
+// Command class with herited classes with or without content
+
+vector<Command> RawInput::parse(string command){
+    bool validCommand = ValidBracketing(command);
     string delooped_command = deloop(command);
     vector<string> vectorized_command = vectorize(delooped_command);
     vector<Command> commands;
-    Command temp;
     for(auto it = vectorized_command.begin(); it != vectorized_command.end(); ++it){
-        temp.command = *it;
-        if(find(CommandWithContent.begin(), CommandWithContent.end(), *it) != CommandWithContent.end()){
+        if(find(CommandWithContentList.begin(), CommandWithContentList.end(), *it) != CommandWithContentList.end()){
+            CommandWithContent temp;
+            temp.commandAt(*it);
             it++;
-            temp.content = *it;
+            temp.contentAt(*it);
+            commands.push_back(temp);
         } else {
-            temp.content = "null";
+            Command temp;
+            temp.commandAt(*it);
+            commands.push_back(temp);
         }
-        commands.push_back(temp);
     }
     return commands;
 }
 
-string deloop(string command){ // this function removes repeats and puts them in plaintext
+string RawInput::deloop(string command){ // this function removes repeats and puts them in plaintext
     size_t i = 0;
     string temp;
     string delooped;
@@ -85,7 +89,7 @@ string deloop(string command){ // this function removes repeats and puts them in
     return delooped;
 }
 
-vector<string> vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
+vector<string> RawInput::vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
     vector<string> vectorized;
     string temp = "";
     for(size_t i = 0; i < command.length(); i++){ // mid-word
@@ -104,6 +108,12 @@ vector<string> vectorize(string command){ // this command turns a string of inst
     return vectorized;
 }
 
-bool commandIsValid(string command){
-    return true;
+bool RawInput::ValidBracketing(string command){
+    int zeroSum = 0;
+    for(int i = 0; i< command.length(); i++){
+        if(command[i] == '['){ zeroSum++; }
+        if(command[i] == ']'){ zeroSum--; }
+        if(zeroSum < 0){ return false; }
+    }
+    return(zeroSum == 0);  
 }

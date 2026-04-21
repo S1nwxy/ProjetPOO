@@ -2,6 +2,8 @@
 #include "svgdrawer.h"
 #include "pen.h"
 
+// try to make the drawing responsive
+
 class Turtle{
     double x_; //position
     double y_;
