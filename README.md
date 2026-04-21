@@ -13,7 +13,7 @@ For more infos, see :
 
 ## Capabilities
 
-This simple interpreter allows four basic command : 
+This simple interpreter allows four basic command (for now): 
 - `fd` : to move forward
 - `turn` : to rotate the turtle either right or left
 - `repeat` : to repeat a subset of commands a certain number of times
