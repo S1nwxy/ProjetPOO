@@ -5,21 +5,21 @@
 #include "menu.h"
 #include "menuoption.h"
 #include "menuaction.h"
-#include "utils.h"
+#include "Input.h"
 
 using namespace std;
 
 int main(){
-    std::string test1 = "fd 10 turn 20 ";
-    std::string test2 = "fd 10 repeat 2 [turn 10] clear"; // fd 10 turn 10 turn 10 clear
-    std::string test3 = "fd 10 repeat 2 [turn 10 repeat 2 [fd -5] turn -5] clear";
+    Input test1 = Input("fd 10 turn 20 ");
+    Input test2 = Input("fd 10 repeat 2 [turn 10] clear"); // fd 10 turn 10 turn 10 clear
+    Input test3 = Input("fd 10 repeat 2 [turn 10 repeat 2 [fd -5] turn -5] clear");
     // fd 10 (turn 10 fd -5 fd -5 turn -5) turn 10 fd -5 fd -5 turn -5 clear
-    std::cout << deloop(test1) << endl;
-    std::cout << deloop(test2) << endl;
-    std::cout << deloop(test3) << endl;
-    vector<string> test1vec = vectorize(deloop(test1));
-    vector<string> test2vec = vectorize(deloop(test2));
-    vector<string> test3vec = vectorize(deloop(test3));
+    std::cout << test1.deloop() << endl;
+    std::cout << test2.deloop() << endl;
+    std::cout << test3.deloop() << endl;
+    vector<string> test1vec = test1.vectorize(test1.deloop());
+    vector<string> test2vec = test2.vectorize(test2.deloop());
+    vector<string> test3vec = test3.vectorize(test3.deloop());
     cout << endl;
     for(string it:test1vec){
         cout << it << ' ';

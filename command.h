@@ -13,12 +13,12 @@ class Command{
     void commandAt(string c){command_ = c;};
 };
 
-class CommandWithContent : public Command{
-    string content_;
+class CommandWithParam : public Command{
+    string param_;
 
     public:
     
-    CommandWithContent(string content = ""){content_ = content;};
-    string content(){return content_;};
-    void contentAt(string c){content_ = c;};
+    CommandWithParam(string param = ""){param = param_;};
+    string param(){return param_;};
+    void paramAt(string c){param_ = c;};
 };

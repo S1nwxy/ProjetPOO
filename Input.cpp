@@ -1,37 +1,20 @@
 #include <algorithm>
-#include "rawInput.h"
+#include "Input.h"
 using namespace std;
-
-vector<string> CommandList = 
-{
-    "fd",
-    "turn",
-    "repeat",
-    "clear"
-    // add the rest later
-};
-
-vector<string> CommandWithContentList = 
-{
-    "fd",
-    "turn",
-    "repeat"
-    // add the rest later
-};
 
 // Command class with herited classes with or without content
 
-vector<Command> RawInput::parse(string command){
-    bool validCommand = ValidBracketing(command);
-    string delooped_command = deloop(command);
-    vector<string> vectorized_command = vectorize(delooped_command);
+vector<Command> Input::parse(){
+    bool validCommand = ValidBracketing(input_);
+    Input delooped_command = Input(this->deloop());
+    vector<string> vectorized_command = vectorize(delooped_command.input());
     vector<Command> commands;
     for(auto it = vectorized_command.begin(); it != vectorized_command.end(); ++it){
-        if(find(CommandWithContentList.begin(), CommandWithContentList.end(), *it) != CommandWithContentList.end()){
-            CommandWithContent temp;
+        if(find(CommandWithParamList.begin(), CommandWithParamList.end(), *it) != CommandWithParamList.end()){
+            CommandWithParam temp;
             temp.commandAt(*it);
             it++;
-            temp.contentAt(*it);
+            temp.paramAt(*it);
             commands.push_back(temp);
         } else {
             Command temp;
@@ -42,13 +25,13 @@ vector<Command> RawInput::parse(string command){
     return commands;
 }
 
-string RawInput::deloop(string command){ // this function removes repeats and puts them in plaintext
+string Input::deloop(){ // this function removes repeats and puts them in plaintext
     size_t i = 0;
     string temp;
     string delooped;
-    while(i < command.length()){ //do the whole string
-        if(command[i] != ' '){ // dont add spaces to word commands
-            if(command[i] != ']'){temp += command[i];} // bandaid fix
+    while(i < input_.length()){ //do the whole string
+        if(input_[i] != ' '){ // dont add spaces to word commands
+            if(input_[i] != ']'){temp += input_[i];} // bandaid fix
         } else { // if its a space we have a whole word
             if(temp != "repeat"){ // +add debugging for invalid words
                 delooped += temp; // add the word
@@ -57,26 +40,26 @@ string RawInput::deloop(string command){ // this function removes repeats and pu
             } else { // its repeat 
                 temp.clear();
                 string amount_str; // get the repeat command
-                while(i < command.length() && command[i] != '['){ // get the amount of repeats
-                    if(command[i] != ' '){ //dont get spaces
-                        amount_str += command[i];
+                while(i < input_.length() && input_[i] != '['){ // get the amount of repeats
+                    if(input_[i] != ' '){ //dont get spaces
+                        amount_str += input_[i];
                     }
                     i++;
                 }
-                if(i < command.length()) i++; // start after the first "["
-                string repeated_command;
+                if(i < input_.length()) i++; // start after the first "["
+                Input repeated_command;
                 int bracket_open = 1; 
-                while(i < command.length() && bracket_open > 0){ // end after "]"
-                    if(command[i] == '['){bracket_open++;}
-                    if(command[i] == ']'){bracket_open--;}
-                    repeated_command += command[i]; // get the whole bracketed command
+                while(i < input_.length() && bracket_open > 0){ // end after "]"
+                    if(input_[i] == '['){bracket_open++;}
+                    if(input_[i] == ']'){bracket_open--;}
+                    repeated_command.input_ += input_[i]; // get the whole bracketed command
                     i++;
                 }
-                if(i < command.length()) i++; // skip the closing bracket
+                if(i < input_.length()) i++; // skip the closing bracket
                 if(!amount_str.empty()){ // incase repeat doesnt have an amount
                     int repeat_count = stoi(amount_str);
                     for(int j = 0; j < repeat_count; j++){ // add the command x times
-                        delooped.append(deloop(repeated_command)); // recursively add delooped commands
+                        delooped.append(repeated_command.deloop()); // recursively add delooped commands
                         delooped += ' '; // may cause bugs,  not sure
                     }
                 }
@@ -89,7 +72,7 @@ string RawInput::deloop(string command){ // this function removes repeats and pu
     return delooped;
 }
 
-vector<string> RawInput::vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
+vector<string> Input::vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
     vector<string> vectorized;
     string temp = "";
     for(size_t i = 0; i < command.length(); i++){ // mid-word
@@ -108,7 +91,7 @@ vector<string> RawInput::vectorize(string command){ // this command turns a stri
     return vectorized;
 }
 
-bool RawInput::ValidBracketing(string command){
+bool Input::ValidBracketing(string command){
     int zeroSum = 0;
     for(int i = 0; i< command.length(); i++){
         if(command[i] == '['){ zeroSum++; }
