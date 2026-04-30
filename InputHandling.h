@@ -21,7 +21,7 @@ vector<string> CommandWithParamList =
     // add the rest later
 };
 
-class Input{
+class InputHandling{
 
     string input_;
     string delooped_;
@@ -32,11 +32,13 @@ class Input{
     vector<string> CommandWithParamList_;
     public :
 
-    Input(string input = "");
+    InputHandling(string input_ = "");
+
+    void update();
     string input(){return input_;};
-    vector<Command> parse();
-    string deloop();
-    vector<string> vectorize();
+    void parse();
+    void deloop();
+    void vectorize();
     bool ValidBracketing(string command); //check bracketing
 
 };

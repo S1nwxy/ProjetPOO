@@ -5,7 +5,7 @@
 #include "menu.h"
 #include "menuoption.h"
 #include "menuaction.h"
-#include "Input.h"
+#include "InputHandling.h"
 
 using namespace std;
 

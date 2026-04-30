@@ -1,43 +1,54 @@
 #include <algorithm>
-#include "Input.h"
+#include <iostream>
+#include "InputHandling.h"
 using namespace std;
 
 // Command class with herited classes with or without content
 
-vector<Command> Input::parse(){
+void InputHandling::update(){
+    deloop();
+    vectorize();
+}
+
+//refactored
+void InputHandling::parse(){
     bool validCommand = ValidBracketing(input_);
-    Input delooped_command = Input(this->deloop());
-    vector<string> vectorized_command = vectorize(delooped_command.input());
-    vector<Command> commands;
-    for(auto it = vectorized_command.begin(); it != vectorized_command.end(); ++it){
-        if(find(CommandWithParamList.begin(), CommandWithParamList.end(), *it) != CommandWithParamList.end()){
+    if(!validCommand){
+        cout << "invalid command" << endl;
+        return;
+    }
+
+    update();
+
+    for(auto it = vectorized_.begin(); it != vectorized_.end(); ++it){
+        if(find(CommandWithParamList_.begin(), CommandWithParamList_.end(), *it) != CommandWithParamList_.end()){
             CommandWithParam temp;
             temp.commandAt(*it);
             it++;
             temp.paramAt(*it);
-            commands.push_back(temp);
+            result_.push_back(temp);
         } else {
             Command temp;
             temp.commandAt(*it);
-            commands.push_back(temp);
+            result_.push_back(temp);
         }
     }
-    return commands;
 }
 
-string Input::deloop(){ // this function removes repeats and puts them in plaintext
+//refactoring USE PARAMETERS SINCE ITS RECURSIVE
+void InputHandling::deloop(){ // this function removes repeats and puts them in plaintext
     size_t i = 0;
     string temp;
     string delooped;
     while(i < input_.length()){ //do the whole string
         if(input_[i] != ' '){ // dont add spaces to word commands
-            if(input_[i] != ']'){temp += input_[i];} // bandaid fix
+            if(input_[i] != ']'){temp += input_[i];} // bandaid fix for too much ]
         } else { // if its a space we have a whole word
-            if(temp != "repeat"){ // +add debugging for invalid words
+            if(temp != "repeat"){ // TODO : +add debugging for invalid words
                 delooped += temp; // add the word
                 delooped += ' '; // add a space
                 temp.clear();
-            } else { // its repeat 
+            } else { // its repeat
                 temp.clear();
                 string amount_str; // get the repeat command
                 while(i < input_.length() && input_[i] != '['){ // get the amount of repeats
@@ -45,14 +56,14 @@ string Input::deloop(){ // this function removes repeats and puts them in plaint
                         amount_str += input_[i];
                     }
                     i++;
-                }
+                } // TODO : check if valid POSITIVE number
                 if(i < input_.length()) i++; // start after the first "["
-                Input repeated_command;
+                InputHandling repeated;
                 int bracket_open = 1; 
                 while(i < input_.length() && bracket_open > 0){ // end after "]"
                     if(input_[i] == '['){bracket_open++;}
                     if(input_[i] == ']'){bracket_open--;}
-                    repeated_command.input_ += input_[i]; // get the whole bracketed command
+                    repeated.input_ += input_[i]; // get the whole bracketed command
                     i++;
                 }
                 if(i < input_.length()) i++; // skip the closing bracket
@@ -72,7 +83,7 @@ string Input::deloop(){ // this function removes repeats and puts them in plaint
     return delooped;
 }
 
-vector<string> Input::vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
+vector<string> InputHandling::vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
     vector<string> vectorized;
     string temp = "";
     for(size_t i = 0; i < command.length(); i++){ // mid-word
@@ -91,7 +102,7 @@ vector<string> Input::vectorize(string command){ // this command turns a string 
     return vectorized;
 }
 
-bool Input::ValidBracketing(string command){
+bool InputHandling::ValidBracketing(string command){
     int zeroSum = 0;
     for(int i = 0; i< command.length(); i++){
         if(command[i] == '['){ zeroSum++; }
