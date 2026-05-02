@@ -2,15 +2,10 @@
 #include <string>
 
 class Pen {
-    bool isActive_;
-    std::string color_;
-    //double width_;
+    bool state_;
 
-    public :
-    Pen(bool isActive = true, std::string = "black");
-    bool isActive(){return isActive_;};
-    std::string color(){return color_;};
-    void change_state(){isActive_ = !(isActive_);};
-    //void change_color();
-    //void change_width();
+    public:
+    Pen(bool state = true);
+    bool isActive() { return state_; };
+    void changeState() { state_ = !(state_); };
 };

@@ -1,10 +1,11 @@
-#include "turtle.h"
 #include <cmath>
+#include "turtle.h"
+
 using namespace std;
 
 #define PI 3.14159265
 
-Turtle::Turtle(SvgDrawer * drawer, Pen * pen, double x, double y, double angle){
+Turtle::Turtle(double x, double y, double angle, SvgDrawer * drawer, Pen * pen){
     x_ = x;
     y_ = y;
     angle_ = angle;

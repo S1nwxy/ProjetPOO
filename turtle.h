@@ -2,8 +2,6 @@
 #include "svgdrawer.h"
 #include "pen.h"
 
-// try to make the drawing responsive
-
 class Turtle{
     double x_; //position
     double y_;
@@ -11,10 +9,8 @@ class Turtle{
     SvgDrawer * drawer_; // à initialiser ig
     Pen * pen_;
 
-
-
     public:
-    Turtle(SvgDrawer * drawer, Pen * pen, double x = 0, double y = 0, double angle = 0); //origin is 0,0 for now but it will change in the future
+    Turtle(double x = 0, double y = 0, double angle = 0, SvgDrawer * drawer = nullptr, Pen * pen = nullptr); //origin is 0,0 for now but it will change in the future
     ~Turtle(){delete drawer_;};
     double x(){return x_;};
     double y(){return y_;};

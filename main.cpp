@@ -7,6 +7,7 @@
 #include "menuaction.h"
 #include "command.h"
 #include "InputHandling.h"
+#include "menulogo.h"
 
 using namespace std;
 
@@ -15,7 +16,6 @@ int main(){
     InputHandling test1 = InputHandling("fd 10 turn 20 ");
     InputHandling test2 = InputHandling("fd 10 repeat 2 [turn 10] clear"); // fd 10 turn 10 turn 10 clear
     InputHandling test3 = InputHandling("fd 10 repeat 2 [turn 10 repeat 2 [fd -5] turn -5] clear");
-    // fd 10 (turn 10 fd -5 fd -5 turn -5) turn 10 fd -5 fd -5 turn -5 clear
     test1.deloop();
     test2.deloop();
     test3.deloop();
@@ -57,5 +57,7 @@ int main(){
     }
     
     // */
+    MenuLogo menu;
+    menu.execute();
     return 0;
 }
