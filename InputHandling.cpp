@@ -4,13 +4,17 @@
 using namespace std;
 
 // Command class with herited classes with or without content
+InputHandling::InputHandling(string input) {
+    input_ = input;
+    CommandList_ = {"fd", "turn", "repeat", "clear"};
+    CommandWithParamList_ = {"fd", "turn", "repeat"};
+}
 
 void InputHandling::update(){
     deloop();
     vectorize();
 }
 
-//refactored
 void InputHandling::parse(){
     bool validCommand = ValidBracketing(input_);
     if(!validCommand){
@@ -35,8 +39,8 @@ void InputHandling::parse(){
     }
 }
 
-//refactoring USE PARAMETERS SINCE ITS RECURSIVE
-void InputHandling::deloop(){ // this function removes repeats and puts them in plaintext
+// this function removes repeats and puts them in plaintext
+void InputHandling::deloop(){
     size_t i = 0;
     string temp;
     string delooped;
@@ -70,7 +74,8 @@ void InputHandling::deloop(){ // this function removes repeats and puts them in 
                 if(!amount_str.empty()){ // incase repeat doesnt have an amount
                     int repeat_count = stoi(amount_str);
                     for(int j = 0; j < repeat_count; j++){ // add the command x times
-                        delooped.append(repeated_command.deloop()); // recursively add delooped commands
+                        repeated.deloop();
+                        delooped.append(repeated.delooped()); // recursively add delooped commands
                         delooped += ' '; // may cause bugs,  not sure
                     }
                 }
@@ -80,26 +85,25 @@ void InputHandling::deloop(){ // this function removes repeats and puts them in 
         i++;
     }
     delooped += temp;
-    return delooped;
+    delooped_ = delooped;
 }
 
-vector<string> InputHandling::vectorize(string command){ // this command turns a string of instructions without repeat [] into a string vector
-    vector<string> vectorized;
+// this command turns a string of instructions without repeat [] into a string vector
+void InputHandling::vectorize(){
     string temp = "";
-    for(size_t i = 0; i < command.length(); i++){ // mid-word
-        if(command[i] != ' '){
-            temp += command[i];
+    for(size_t i = 0; i < delooped_.length(); i++){ // mid-word
+        if(delooped_[i] != ' '){
+            temp += delooped_[i];
         } else { // end of word
             if(!temp.empty()){
-                vectorized.push_back(temp);
+                vectorized_.push_back(temp);
                 temp.clear();
             }
         }
     }
     if(!temp.empty()){
-        vectorized.push_back(temp);
+        vectorized_.push_back(temp);
     }
-    return vectorized;
 }
 
 bool InputHandling::ValidBracketing(string command){

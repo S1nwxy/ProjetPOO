@@ -4,23 +4,6 @@
 #include "command.h"
 using namespace std;
 
-vector<string> CommandList = 
-{
-    "fd",
-    "turn",
-    "repeat",
-    "clear"
-    // add the rest later
-};
-
-vector<string> CommandWithParamList = 
-{
-    "fd",
-    "turn",
-    "repeat"
-    // add the rest later
-};
-
 class InputHandling{
 
     string input_;
@@ -32,10 +15,13 @@ class InputHandling{
     vector<string> CommandWithParamList_;
     public :
 
-    InputHandling(string input_ = "");
+    InputHandling(string input = "");
 
     void update();
     string input(){return input_;};
+    string delooped() {return delooped_;};
+    vector<string> vectorized() {return vectorized_;};
+    vector<Command> result() {return result_;};
     void parse();
     void deloop();
     void vectorize();
