@@ -49,9 +49,9 @@ int main(){
 
     cout << endl;
     i = 0;
-    for(auto it : test1.result()){
+    for(const auto& it : test1.result()){
         cout << i << ": ";
-        it.display();
+        it->display();
         cout << ' ';
         i++;
     }

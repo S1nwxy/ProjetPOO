@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <iostream>
 using namespace std;
 
 class Command{
@@ -11,6 +12,9 @@ class Command{
     Command(string command = ""){command_ = command;};
     string command(){return command_;};
     void commandAt(string c){command_ = c;};
+    virtual void display() const {std::cout << command_;};
+
+    virtual ~Command() = default;
 };
 
 class CommandWithParam : public Command{
@@ -18,7 +22,17 @@ class CommandWithParam : public Command{
 
     public:
     
-    CommandWithParam(string param = ""){param = param_;};
+    CommandWithParam(string param = "") : Command() {
+        param_ = param;
+    };
+    CommandWithParam(string command, string param) {
+        commandAt(command);
+        param_ = param;
+    };
     string param(){return param_;};
     void paramAt(string c){param_ = c;};
+    void display() const override {
+        Command::display();
+        cout << ' ' << param_;
+    }
 };

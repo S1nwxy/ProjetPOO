@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include "InputHandling.h"
+#include "command.h"
 using namespace std;
 
 // Command class with herited classes with or without content
@@ -26,15 +27,12 @@ void InputHandling::parse(){
 
     for(auto it = vectorized_.begin(); it != vectorized_.end(); ++it){
         if(find(CommandWithParamList_.begin(), CommandWithParamList_.end(), *it) != CommandWithParamList_.end()){
-            CommandWithParam temp;
-            temp.commandAt(*it);
+            string command = *it;
             it++;
-            temp.paramAt(*it);
-            result_.push_back(temp);
+            string param = *it;
+            result_.push_back(new CommandWithParam(command,param));
         } else {
-            Command temp;
-            temp.commandAt(*it);
-            result_.push_back(temp);
+            result_.push_back(new Command(*it));
         }
     }
 }
