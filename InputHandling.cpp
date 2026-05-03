@@ -13,6 +13,11 @@ InputHandling::InputHandling(string input) {
 
 void InputHandling::update(){
     deloop();
+    vectorized_.clear();
+    for(auto& cmd: result_) {
+        delete cmd;
+    }
+    result_.clear();
     vectorize();
 }
 
