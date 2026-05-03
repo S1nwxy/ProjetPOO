@@ -93,6 +93,8 @@ bool MenuLogo::executeProgram(int) {
             turtle_->angleAt(0);
         }
     }
+
+    turtle_->drawTurtle();
     turtle_->drawer()->endDraw();
     return false;
 }
