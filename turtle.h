@@ -3,14 +3,13 @@
 #include "svgdrawer.h"
 #include "pen.h"
 #include "commandHistory.h"
+#include <cmath>
 
 // Author : Axel
 
 // this file holds the Turtle class, which is the main class.
 // it has the location and state of the turtle,
 // but also has CommandHistory, SvgDrawer and Pen components.
-
-const double PI = 3.14159265358979323846; // to translate angles from degrees to radians
 
 class Turtle{
     double x_; //position
@@ -40,6 +39,6 @@ class Turtle{
     Pen* pen() {return pen_;};
 
     void step(int amount); // handles drawing logic
-    void turn(double angle){angle_ = angle_ + angle * PI / 180;};
+    void turn(double angle){angle_ = angle_ + angle * M_PI / 180;};
     void drawTurtle(); // draws a small triangle that represents the turtle at its angle and position
 };

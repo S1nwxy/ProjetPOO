@@ -78,7 +78,6 @@ bool MenuLogo::newProgram(int) {
 
 bool MenuLogo::executeProgram(int) {
     turtle_->drawer()->beginDraw("logo.html");
-    
     for(auto line : turtle_ -> hist() -> lines()){
         turtle_-> drawer() -> drawLine(line.x1, line.y1, line.x2, line.y2);
     }
@@ -98,7 +97,7 @@ bool MenuLogo::executeProgram(int) {
     turtle_->drawTurtle();
     turtle_->drawer()->endDraw();
     cout << "Turtle coordinates (x, y) : " << turtle_ -> x() << " " << turtle_ -> y() <<endl;
-    cout << "Turle angle (degrees) : " << turtle_ -> angle() * 180 / PI << endl << endl;
+    cout << "Turle angle (degrees) : " << turtle_ -> angle() * 180 / M_PI << endl << endl;
     return false;
 }
 

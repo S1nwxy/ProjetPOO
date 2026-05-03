@@ -34,11 +34,11 @@ void Turtle::drawTurtle(){ // draws the turtle
     x1 = x_ + 8 * cos(angleRad);
     y1 = y_ + 8 * sin(angleRad);
 
-    x2 = x_ + 8 * cos(angleRad + 5 * PI / 6);
-    y2 = y_ + 8 * sin(angleRad + 5 * PI / 6); 
+    x2 = x_ + 8 * cos(angleRad + 5 * M_PI / 6);
+    y2 = y_ + 8 * sin(angleRad + 5 * M_PI / 6); 
 
-    x3 = x_ + 8 * cos(angleRad - 5 * PI / 6);
-    y3 = y_ + 8 * sin(angleRad - 5 * PI / 6); 
+    x3 = x_ + 8 * cos(angleRad - 5 * M_PI / 6);
+    y3 = y_ + 8 * sin(angleRad - 5 * M_PI / 6); 
 
     drawer_ -> setStrokeColor("red"); // to be able to see it correctly
     drawer_ -> setStrokeWidth(1); // arbitrary choice

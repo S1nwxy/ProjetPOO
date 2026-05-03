@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <cmath>
 #include "menu.h"
 #include "svgdrawer.h"
 #include "InputHandling.h"
@@ -8,8 +9,6 @@
 #include "commandHistory.h"
 
 // Author : Johann
-
-const double PI = 3.14159265358979323846;
 
 struct CommandHelp {
     std::string name;
