@@ -31,6 +31,7 @@ class Turtle{
 
     SvgDrawer* drawer() {return drawer_;};
     CommandHistory* hist() {return hist_;};
+    Pen* pen() {return pen_;};
 
     void step(int amount); // gere la logique de dessin
     void turn(double angle){angle_ = angle_ + angle * PI / 180;};

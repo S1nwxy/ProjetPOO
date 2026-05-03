@@ -91,6 +91,8 @@ bool MenuLogo::executeProgram(int) {
             turtle_->xAt(turtle_->drawer()->drawingWidth()/2);
             turtle_->yAt(turtle_->drawer()->drawingHeight()/2);
             turtle_->angleAt(0);
+        } else if(cmd->command() == "cpen"){
+            turtle_->pen()->changeState();
         }
     }
 
