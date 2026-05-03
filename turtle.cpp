@@ -1,10 +1,11 @@
 #include <cmath>
 #include "turtle.h"
 #include "svgdrawer.h"
+#include <cmath>
 
 using namespace std;
 
-#define PI 3.14159265
+#define PI 4 * atan(1)
 
 Turtle::Turtle(){
     drawer_ = new SvgDrawer("logo.html");
