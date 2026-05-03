@@ -1,8 +1,10 @@
 #pragma once
+#include <cmath>
 #include "svgdrawer.h"
 #include "pen.h"
 #include "commandHistory.h"
-#include <cmath>
+
+const double PI = 3.14159265358979323846;
 
 class Turtle{
     double x_; //position
@@ -31,7 +33,7 @@ class Turtle{
     CommandHistory* hist() {return hist_;};
 
     void step(int amount); // gere la logique de dessin
-    void turn(double angle){angle_ = angle_ + angle * M_PI / 180;};
+    void turn(double angle){angle_ = angle_ + angle * PI / 180;};
 
     void drawTurtle();
 };
