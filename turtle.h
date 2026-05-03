@@ -2,11 +2,12 @@
 #include "svgdrawer.h"
 #include "pen.h"
 #include "commandHistory.h"
+#include <cmath>
 
 class Turtle{
     double x_; //position
     double y_;
-    double angle_; // angle
+    double angle_; // angle in radians
 
     CommandHistory * hist_;
     SvgDrawer * drawer_; // à initialiser ig
@@ -30,7 +31,7 @@ class Turtle{
     CommandHistory* hist() {return hist_;};
 
     void step(int amount); // gere la logique de dessin
-    void turn(double angle){angle_ = angle_ + angle;};
+    void turn(double angle){angle_ = angle_ + angle * M_PI / 180;};
 
     void drawTurtle();
 };
