@@ -5,8 +5,7 @@
 #include "commandHistory.h"
 #include <cmath>
 
-// Author : Axel
-// Modifications : Johann
+// Author : Axel, modifications : Johann
 
 // this file holds the Turtle class, which is the main class.
 // it has the location and state of the turtle,
