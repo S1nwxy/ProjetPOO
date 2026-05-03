@@ -4,6 +4,8 @@
 #include "pen.h"
 #include "commandHistory.h"
 
+// Author : Axel
+
 // this file holds the Turtle class, which is the main class.
 // it has the location and state of the turtle,
 // but also has CommandHistory, SvgDrawer and Pen components.

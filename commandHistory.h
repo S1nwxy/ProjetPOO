@@ -7,6 +7,8 @@
 // when executing every command after the first, every memorized line is re-drawn,
 // allowing the user to see what he's doing inbetween commands
 
+// Author : Axel
+
 using std::vector;
 
 struct line{ // this represents one line (begin and end coordinates)

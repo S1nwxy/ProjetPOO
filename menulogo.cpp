@@ -10,6 +10,8 @@
 
 using namespace std;
 
+// Author : Johann
+
 std::vector<CommandHelp> commands = {
     { "fd number",   { "Move the turtle forward by the amount specified by number",
                         "Example : fd 100" }},

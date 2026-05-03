@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+//original author : Axel, modifications : Johann
+
 class Command{ // this class holds a command
     string command_;
 

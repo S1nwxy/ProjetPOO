@@ -30,3 +30,5 @@ The interpreter will :
 ## Diagram of class (UML)
 
 ![diagram of class](UML/UML.png) 
+
+Author : Johann
