@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int main(){
+int main(){ // a lot of testing, the main is only there to create and execute Menu
     /**** INFO: TEST SCRIPT
     InputHandling test1 = InputHandling("fd 10 turn 20 ");
     InputHandling test2 = InputHandling("fd 10 repeat 2 [turn 10] clear"); // fd 10 turn 10 turn 10 clear

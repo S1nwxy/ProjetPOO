@@ -10,6 +10,8 @@
 
 using namespace std;
 
+// Author : Johann
+
 std::vector<CommandHelp> commands = {
     { "fd number",   { "Move the turtle forward by the amount specified by number",
                         "Example : fd 100" }},
@@ -95,6 +97,8 @@ bool MenuLogo::executeProgram(int) {
 
     turtle_->drawTurtle();
     turtle_->drawer()->endDraw();
+    cout << "Turtle coordinates (x, y) : " << turtle_ -> x() << " " << turtle_ -> y() <<endl;
+    cout << "Turle angle (degrees) : " << turtle_ -> angle() * 180 / PI << endl << endl;
     return false;
 }
 

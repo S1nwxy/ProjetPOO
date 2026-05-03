@@ -4,21 +4,23 @@
 #include <iostream>
 using namespace std;
 
-class Command{
+//original author : Axel, modifications : Johann
+
+class Command{ // this class holds a command
     string command_;
 
     public :
 
     Command(string command = ""){command_ = command;};
     string command(){return command_;};
-    virtual string param() {return "";};
+    virtual string param() {return "";}; 
     void commandAt(string c){command_ = c;};
-    virtual void display() const {std::cout << command_;};
+    // virtual void display() const {std::cout << command_;}; test function
 
     virtual ~Command() = default;
 };
 
-class CommandWithParam : public Command{
+class CommandWithParam : public Command{ // this subclass holds a command's parameter
     string param_;
 
     public:
@@ -30,10 +32,6 @@ class CommandWithParam : public Command{
         commandAt(command);
         param_ = param;
     };
-    string param() override {return param_;};
-    void paramAt(string c){param_ = c;};
-    void display() const override {
-        Command::display();
-        cout << ' ' << param_;
-    }
+    string param() {return param_;};
+    // void paramAt(string c){param_ = c;};
 };
