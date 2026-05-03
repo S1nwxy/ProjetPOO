@@ -12,14 +12,11 @@ struct line{
 };
 
 class CommandHistory{
-    double turtlePosition_[2];
-    double turtleAngle_;
-    vector<line> coordinates_;
+    vector<line> lines_;
 
     public :
 
-    CommandHistory(double pos[2], double angle, vector<line> c = {}){turtlePosition_[0] = pos[0]; turtlePosition_[1] = pos[1]; turtleAngle_ = angle; coordinates_ = c;}
-    double *turtlePosition(){return turtlePosition_;};
-    double turtleAngle(){return turtleAngle_;};
-    vector<line> coordinates(){return coordinates_;};
+    CommandHistory(vector<line> l = {}){lines_ = l;}
+    vector<line> lines(){return lines_;};
+    void addLine(double x1, double y1, double x2, double y2){lines_.push_back({x1,x2,y1,y2});}
 };

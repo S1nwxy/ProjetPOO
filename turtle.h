@@ -1,11 +1,14 @@
 #pragma once
 #include "svgdrawer.h"
 #include "pen.h"
+#include "commandHistory.h"
 
 class Turtle{
     double x_; //position
     double y_;
     double angle_; // angle
+
+    CommandHistory * hist_;
     SvgDrawer * drawer_; // à initialiser ig
     Pen * pen_;
 
@@ -14,6 +17,7 @@ class Turtle{
     ~Turtle() {
         delete drawer_;
         delete pen_;
+        delete hist_;
     };
     double x(){return x_;};
     double y(){return y_;};

@@ -21,6 +21,7 @@ void Turtle::step(int amount){
     int newy = y_ + amount * sin(angle_ * PI / 180);
     if(pen_->isActive()){
         drawer_->drawLine(x_, y_, newx, newy);
+        // hist->addLine(x_, y_, newx, newy);
     }
     x_ = newx;
     y_ = newy;
