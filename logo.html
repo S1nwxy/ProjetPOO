@@ -4,3 +4,29 @@
 <h2 >logo.html</h2>
 <svg width="400" height="400" xmlns="http://www.w3.org/2000/svg" >
 <rect width="400" height="400" x="0" y="0" style="fill:none;stroke-width:1;stroke:gray" />
+<line x1="200" y1="200" x2="250" y2="200" style="fill:none;stroke:navy;stroke-width:3" />
+<line x1="250" y1="200" x2="300" y2="200" style="fill:none;stroke:navy;stroke-width:3" />
+<line x1="300" y1="200" x2="300" y2="230" style="fill:none;stroke:navy;stroke-width:3" />
+</svg>
+<script >
+// Function to reload the page
+function reloadPage() {
+  // Fetch the new page content asynchronously
+  fetch(window.location.href)
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const newContent = doc.querySelector('body').innerHTML;
+      document.querySelector('body').innerHTML = newContent;
+    })
+    .catch(error => {
+      console.error('Error reloading page:', error);
+    });
+}
+
+// Reload the page every 1 second
+setInterval(reloadPage, 1000);
+</script>
+</body>
+</html>

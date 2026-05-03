@@ -8,6 +8,7 @@ using namespace std;
 
 Turtle::Turtle(){
     drawer_ = new SvgDrawer("logo.html");
+    hist_ = new CommandHistory;
 
     x_ = drawer_->drawingWidth()/2;
     y_ = drawer_->drawingHeight()/2;
