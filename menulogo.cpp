@@ -27,13 +27,18 @@ std::vector<CommandHelp> commands = {
 
 MenuLogo::MenuLogo() : Menu("Main Menu") {
     program_ = new InputHandling();
-    // drawer_ = new SvgDrawer("logo.html");
     turtle_ = new Turtle();
+
+    turtle_->drawer()->beginDraw("logo.html");
+    turtle_->drawTurtle();
+    turtle_->drawer()->endDraw();
 
     addOption(new MenuAction<MenuLogo>("Enter new Logo program", &MenuLogo::newProgram));
     addOption(new MenuAction<MenuLogo>("Execute the Logo program", &MenuLogo::executeProgram));
     addOption(new MenuAction<MenuLogo>("Clear the drawing", &MenuLogo::clearDrawing));
     addOption(new MenuAction<MenuLogo>("Exit the application", &MenuLogo::exitMenu));
+
+
 }
 
 MenuLogo::~MenuLogo() {
@@ -107,6 +112,7 @@ bool MenuLogo::clearDrawing(int) {
     turtle_->yAt(turtle_->drawer()->drawingHeight()/2);
     turtle_->angleAt(0);
     turtle_->drawer()->beginDraw("logo.html");
+    turtle_->drawTurtle();
     turtle_->drawer()->endDraw();
     return false;
 }
