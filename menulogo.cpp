@@ -14,6 +14,7 @@ using namespace std;
 
 std::vector<CommandHelp> commands = {
     { "fd number",   { "Move the turtle forward by the amount specified by number",
+                       "Or backward by using a negative number",
                         "Example : fd 100" }},
     { "turn number", { "Turn the turtle by an angle specified by number",
                         "Enter a positive number to turn right and a negative number to turn left",
