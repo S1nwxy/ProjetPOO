@@ -1,5 +1,4 @@
 #pragma once
-
 #include <string>
 #include <vector>
 #include "menu.h"
@@ -7,6 +6,8 @@
 #include "InputHandling.h"
 #include "turtle.h"
 #include "commandHistory.h"
+
+const double PI = 3.14159265358979323846;
 
 struct CommandHelp {
     std::string name;

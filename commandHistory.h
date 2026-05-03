@@ -2,9 +2,14 @@
 #include <vector>
 #include "turtle.h"
 
+// this file is for the CommandHistory class that is used to be able to "modify" a drawing
+// when executing any command that results in a line being drawn, this line is memorized here
+// when executing every command after the first, every memorized line is re-drawn,
+// allowing the user to see what he's doing inbetween commands
+
 using std::vector;
 
-struct line{
+struct line{ // this represents one line (begin and end coordinates)
     double x1;
     double x2;
     double y1;

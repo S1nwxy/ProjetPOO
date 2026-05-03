@@ -4,16 +4,20 @@
 #include "pen.h"
 #include "commandHistory.h"
 
-const double PI = 3.14159265358979323846;
+// this file holds the Turtle class, which is the main class.
+// it has the location and state of the turtle,
+// but also has CommandHistory, SvgDrawer and Pen components.
+
+const double PI = 3.14159265358979323846; // to translate angles from degrees to radians
 
 class Turtle{
     double x_; //position
     double y_;
     double angle_; // angle in radians
 
-    CommandHistory * hist_;
-    SvgDrawer * drawer_; // à initialiser ig
-    Pen * pen_;
+    CommandHistory * hist_; // to access every line already traced
+    SvgDrawer * drawer_; // to draw (duh)
+    Pen * pen_; // to know whether to draw or not
 
     public:
     Turtle();
@@ -33,8 +37,7 @@ class Turtle{
     CommandHistory* hist() {return hist_;};
     Pen* pen() {return pen_;};
 
-    void step(int amount); // gere la logique de dessin
+    void step(int amount); // handles drawing logic
     void turn(double angle){angle_ = angle_ + angle * PI / 180;};
-
-    void drawTurtle();
+    void drawTurtle(); // draws a small triangle that represents the turtle at its angle and position
 };
