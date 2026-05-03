@@ -29,6 +29,9 @@ public:
   //! Constructor
   SvgDrawer(std::string htmlFile, int dWidth=400, int dHeight=400);
 
+  int drawingWidth() const { return drawingWidth_; };
+  int drawingHeight() const { return drawingHeight_; };
+
   //! Set the drawing area size
   void setDrawingSize(int dWidth,int dHeight);
 

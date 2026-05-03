@@ -10,11 +10,20 @@ class Turtle{
     Pen * pen_;
 
     public:
-    Turtle(double x = 0, double y = 0, double angle = 0, SvgDrawer * drawer = nullptr, Pen * pen = nullptr); //origin is 0,0 for now but it will change in the future
-    ~Turtle(){delete drawer_;};
+    Turtle();
+    ~Turtle() {
+        delete drawer_;
+        delete pen_;
+    };
     double x(){return x_;};
     double y(){return y_;};
     double angle(){return angle_;};
+    void xAt(double x) { x_ = x; };
+    void yAt(double y) { y_ = y; };
+    void angleAt(double angle) { angle_ = angle; };
+
+    SvgDrawer* drawer() {return drawer_;};
+
 
     void step(int amount); // gere la logique de dessin
     void turn(double angle){angle_ = angle_ + angle;};

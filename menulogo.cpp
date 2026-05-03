@@ -1,12 +1,12 @@
 #include <iomanip>
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <vector>
 #include "menu.h"
 #include "menuaction.h"
 #include "menulogo.h"
 #include "svgdrawer.h"
-#include "utils.h"
+#include "InputHandling.h"
 
 using namespace std;
 
@@ -24,12 +24,19 @@ std::vector<CommandHelp> commands = {
 };
 
 MenuLogo::MenuLogo() : Menu("Main Menu") {
-    program_ = "";
-    drawer_ = new SvgDrawer("logo.html");
+    program_ = new InputHandling();
+    // drawer_ = new SvgDrawer("logo.html");
+    turtle_ = new Turtle();
 
     addOption(new MenuAction<MenuLogo>("Enter new Logo program", &MenuLogo::newProgram));
 
     addOption(new MenuAction<MenuLogo>("Execute the Logo program", &MenuLogo::executeProgram));
+}
+
+MenuLogo::~MenuLogo() {
+    delete program_;
+    // delete drawer_;
+    delete turtle_;
 }
 
 void MenuLogo::print() const {
@@ -59,28 +66,30 @@ void MenuLogo::printHelp(const std::vector<CommandHelp>& commands, int colWidth)
 
 bool MenuLogo::newProgram(int) {
     printHelp(commands);
+    string program;
     cout << "Enter your program : " << endl;
-    getline(cin, program_);
+    getline(cin, program);
+    program_->inputAt(program);
 
     return false;
 }
 
 bool MenuLogo::executeProgram(int) {
-    cout << "Delooped Program" << endl;
-    string deloopedProgram = deloop(program_);
-    cout << deloopedProgram << endl;
-
-    cout << "Vectorized Program" << endl;
-    vector<string> vectorizedProgram = vectorize(deloopedProgram);
-    int i = 1;
-    for (string str: vectorizedProgram) {
-        cout << i << " " + str + " ";
-        i++;
+    turtle_->drawer()->beginDraw("logo.html");
+    program_->parse();
+    cout << program_->input() << endl;
+    for(const auto& cmd : program_->result()) {
+        if(cmd->command() == "fd") {
+            turtle_->step(stoi(cmd->param()));
+        } else if(cmd->command() == "turn") {
+            turtle_->turn(stod(cmd->param()));
+        } else if(cmd->command() == "clear") {
+            turtle_->xAt(turtle_->drawer()->drawingWidth()/2);
+            turtle_->yAt(turtle_->drawer()->drawingHeight()/2);
+            turtle_->angleAt(0);
+            // TODO: remove all drawings
+        }
     }
-    cout << endl;
-
-    drawer_->beginDraw("LOGO");
-    drawer_->drawCircle(100, 100, 75);
-    drawer_->endDraw();
+    turtle_->drawer()->endDraw();
     return false;
 }

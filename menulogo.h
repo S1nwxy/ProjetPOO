@@ -4,6 +4,8 @@
 #include <vector>
 #include "menu.h"
 #include "svgdrawer.h"
+#include "InputHandling.h"
+#include "turtle.h"
 
 struct CommandHelp {
     std::string name;
@@ -11,8 +13,9 @@ struct CommandHelp {
 };
 
 class MenuLogo : public Menu {
-    std::string program_;
-    SvgDrawer * drawer_;
+    InputHandling* program_;
+    Turtle* turtle_;
+    // SvgDrawer * drawer_;
 
 public:
     MenuLogo();
@@ -22,4 +25,6 @@ public:
 
     bool newProgram(int);
     bool executeProgram(int);
+
+    ~MenuLogo();
 };

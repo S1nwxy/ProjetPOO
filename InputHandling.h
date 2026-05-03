@@ -19,6 +19,7 @@ class InputHandling{
 
     void update();
     string input(){return input_;};
+    void inputAt(string input) {input_ = input;};
     string delooped() {return delooped_;};
     vector<string> vectorized() {return vectorized_;};
     vector<Command*>& result() {return result_;};

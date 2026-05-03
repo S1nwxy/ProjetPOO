@@ -1,16 +1,19 @@
 #include <cmath>
 #include "turtle.h"
+#include "svgdrawer.h"
 
 using namespace std;
 
 #define PI 3.14159265
 
-Turtle::Turtle(double x, double y, double angle, SvgDrawer * drawer, Pen * pen){
-    x_ = x;
-    y_ = y;
-    angle_ = angle;
-    drawer_ = drawer;
-    pen_ = pen;
+Turtle::Turtle(){
+    drawer_ = new SvgDrawer("logo.html");
+
+    x_ = drawer_->drawingWidth()/2;
+    y_ = drawer_->drawingHeight()/2;
+    angle_ = 0;
+
+    pen_ = new Pen();
 }
 
 void Turtle::step(int amount){

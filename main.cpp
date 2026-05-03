@@ -12,7 +12,7 @@
 using namespace std;
 
 int main(){
-    // /**** INFO: TEST SCRIPT
+    /**** INFO: TEST SCRIPT
     InputHandling test1 = InputHandling("fd 10 turn 20 ");
     InputHandling test2 = InputHandling("fd 10 repeat 2 [turn 10] clear"); // fd 10 turn 10 turn 10 clear
     InputHandling test3 = InputHandling("fd 10 repeat 2 [turn 10 repeat 2 [fd -5] turn -5] clear");
@@ -56,7 +56,7 @@ int main(){
         i++;
     }
     
-    // */
+    */
     MenuLogo menu;
     menu.execute();
     return 0;
