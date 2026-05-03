@@ -4,8 +4,6 @@
 
 using namespace std;
 
-// Explanations & authorship in the header file
-
 Turtle::Turtle(){
     drawer_ = new SvgDrawer("logo.html");
     hist_ = new CommandHistory;
