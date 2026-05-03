@@ -20,7 +20,7 @@ std::vector<CommandHelp> commands = {
                                     "Example : repeat 2 [fd 100 turn 15 fd 50]",
                                     "You can chain multiple repeat commands",
                                     "Example : repeat 2 [repeat 2 [fd 100]]" }},
-    { "clear", {"Clear the screen of any drawings" }}
+    { "cpen", {"Changes the state of the pen (up/down)" }}
 };
 
 MenuLogo::MenuLogo() : Menu("Main Menu") {
