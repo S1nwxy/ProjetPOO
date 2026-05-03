@@ -29,8 +29,8 @@ MenuLogo::MenuLogo() : Menu("Main Menu") {
     turtle_ = new Turtle();
 
     addOption(new MenuAction<MenuLogo>("Enter new Logo program", &MenuLogo::newProgram));
-
     addOption(new MenuAction<MenuLogo>("Execute the Logo program", &MenuLogo::executeProgram));
+    addOption(new MenuAction<MenuLogo>("Exit the application", &MenuLogo::exitMenu));
 }
 
 MenuLogo::~MenuLogo() {
