@@ -32,6 +32,8 @@ class InputHandling{
         for(auto it : result_) {
             delete it;
         }
+        vectorized_.clear();
+        result_.clear();
     }
 
 };
