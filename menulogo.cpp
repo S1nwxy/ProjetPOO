@@ -30,6 +30,7 @@ MenuLogo::MenuLogo() : Menu("Main Menu") {
 
     addOption(new MenuAction<MenuLogo>("Enter new Logo program", &MenuLogo::newProgram));
     addOption(new MenuAction<MenuLogo>("Execute the Logo program", &MenuLogo::executeProgram));
+    addOption(new MenuAction<MenuLogo>("Clear the drawing", &MenuLogo::clearDrawing));
     addOption(new MenuAction<MenuLogo>("Exit the application", &MenuLogo::exitMenu));
 }
 
@@ -87,16 +88,22 @@ bool MenuLogo::executeProgram(int) {
             turtle_->step(stoi(cmd->param()));
         } else if(cmd->command() == "turn") {
             turtle_->turn(stod(cmd->param()));
-        } else if(cmd->command() == "clear") {
-            turtle_->xAt(turtle_->drawer()->drawingWidth()/2);
-            turtle_->yAt(turtle_->drawer()->drawingHeight()/2);
-            turtle_->angleAt(0);
         } else if(cmd->command() == "cpen"){
             turtle_->pen()->changeState();
         }
     }
 
     turtle_->drawTurtle();
+    turtle_->drawer()->endDraw();
+    return false;
+}
+
+bool MenuLogo::clearDrawing(int) {
+    turtle_->hist()->lines().clear();
+    turtle_->xAt(turtle_->drawer()->drawingWidth()/2);
+    turtle_->yAt(turtle_->drawer()->drawingHeight()/2);
+    turtle_->angleAt(0);
+    turtle_->drawer()->beginDraw("logo.html");
     turtle_->drawer()->endDraw();
     return false;
 }

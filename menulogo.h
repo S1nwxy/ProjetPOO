@@ -27,6 +27,7 @@ public:
 
     bool newProgram(int);
     bool executeProgram(int);
+    bool clearDrawing(int);
 
     ~MenuLogo();
 };

@@ -17,6 +17,6 @@ class CommandHistory{
     public :
 
     CommandHistory(vector<line> l = {}){lines_ = l;}
-    vector<line> lines(){return lines_;};
+    vector<line>& lines(){return lines_;};
     void addLine(double x1, double y1, double x2, double y2){lines_.push_back({x1,x2,y1,y2});}
 };
