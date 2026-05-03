@@ -29,6 +29,7 @@ MenuLogo::MenuLogo() : Menu("Main Menu") {
     program_ = new InputHandling();
     turtle_ = new Turtle();
 
+    // draw the turtle indicator at first so that the user know where it is
     turtle_->drawer()->beginDraw("logo.html");
     turtle_->drawTurtle();
     turtle_->drawer()->endDraw();
