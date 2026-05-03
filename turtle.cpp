@@ -5,6 +5,7 @@
 using namespace std;
 
 // Author : Axel
+// Except the constructor made by Johann
 
 Turtle::Turtle(){
     drawer_ = new SvgDrawer("logo.html");

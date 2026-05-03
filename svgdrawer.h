@@ -29,6 +29,8 @@ public:
   //! Constructor
   SvgDrawer(std::string htmlFile, int dWidth=400, int dHeight=400);
 
+  // Modified by Johann
+  // Used to set the turtle origin based on the drawing size
   int drawingWidth() const { return drawingWidth_; };
   int drawingHeight() const { return drawingHeight_; };
 

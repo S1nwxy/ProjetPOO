@@ -13,9 +13,11 @@ class Command{ // this class holds a command
 
     Command(string command = ""){command_ = command;};
     string command(){return command_;};
+    // In InputHandling, we hold a vector of Command. 
+    // But when executing the program we need to acces the param_ attribute, which is only in CommandWithParam class. 
+    // So we have to define a virtual param() accessor function that will be replaced by the CommandWithParam own param() function.
     virtual string param() {return "";}; 
     void commandAt(string c){command_ = c;};
-    // virtual void display() const {std::cout << command_;}; test function
 
     virtual ~Command() = default;
 };
@@ -33,5 +35,4 @@ class CommandWithParam : public Command{ // this subclass holds a command's para
         param_ = param;
     };
     string param() {return param_;};
-    // void paramAt(string c){param_ = c;};
 };

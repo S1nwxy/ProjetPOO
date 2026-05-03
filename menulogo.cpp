@@ -47,6 +47,7 @@ MenuLogo::~MenuLogo() {
     delete turtle_;
 }
 
+// The first message shown at the beginning of the main menu.
 void MenuLogo::print() const {
     cout << " -- Simple Logo programming language interpreter -- " << endl
          << endl;
@@ -54,6 +55,9 @@ void MenuLogo::print() const {
 }
 
 void MenuLogo::printHelp(const std::vector<CommandHelp>& commands, int colWidth) const {
+    // Header line :
+    // Command      Description
+    // -----------------------------
     cout << left
          << setw(colWidth) << "Command"
          << "Description" << endl
@@ -61,16 +65,20 @@ void MenuLogo::printHelp(const std::vector<CommandHelp>& commands, int colWidth)
 
     for (const auto& cmd : commands) {
         for (size_t i = 0; i < cmd.description.size(); ++i) {
+            // For the first line of the description, the command name will be displayed, followed by the description (i = 0)
+            // For the other lines, a blank column is displayed in order to indent the description and create multi-line description
             if (i == 0)
                 cout << setw(colWidth) << cmd.name;
             else
-                cout << setw(colWidth) << ""; // colonne gauche vide
+                cout << setw(colWidth) << "";
             cout << cmd.description[i] << endl;
         }
-        cout << endl; // ligne vide entre les commandes
+        // Empty lines between every entry
+        cout << endl;
     }
 }
 
+// store a line of program with getline (until the newline character \n is found)
 bool MenuLogo::newProgram(int) {
     printHelp(commands);
     string program;
@@ -81,6 +89,11 @@ bool MenuLogo::newProgram(int) {
     return false;
 }
 
+// Executes the program.
+// It starts by drawing the lines stored in the history so that we don't lose the previous drawings when opening the html file (call to beginDraw() function).
+// Then it parse tne input and execute the functions accordingly
+// The drawing logic (calls to drawLine) is handled by Turtle's step function and Turtle's drawer_ attribute
+// The last part of the program is here to show the coordinates of the Turtle while it's moving during the execution.
 bool MenuLogo::executeProgram(int) {
     turtle_->drawer()->beginDraw("logo.html");
     for(auto line : turtle_ -> hist() -> lines()){
@@ -106,6 +119,9 @@ bool MenuLogo::executeProgram(int) {
     return false;
 }
 
+// clear the drawing by clearing the history so that we don't draw previous programs again on the next execution
+// Then it resets the Turtle origin to the center
+// And finally it reopens the html file to clear everything and draw the turle indicator
 bool MenuLogo::clearDrawing(int) {
     turtle_->hist()->lines().clear();
     turtle_->xAt(turtle_->drawer()->drawingWidth()/2);
