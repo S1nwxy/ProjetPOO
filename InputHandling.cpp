@@ -4,7 +4,6 @@
 #include "command.h"
 using namespace std;
 
-// Command class with herited classes with or without content
 InputHandling::InputHandling(string input) {
     input_ = input;
     CommandList_ = {"fd", "turn", "repeat", "cpen"};
@@ -79,7 +78,7 @@ void InputHandling::deloop(){
                     for(int j = 0; j < repeat_count; j++){ // add the command x times
                         repeated.deloop();
                         delooped.append(repeated.delooped()); // recursively add delooped commands
-                        delooped += ' '; // may cause bugs,  not sure
+                        delooped += ' ';
                     }
                 }
                 continue; // skip the i++ at the end of the main loop
