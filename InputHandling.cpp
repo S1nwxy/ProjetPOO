@@ -7,7 +7,7 @@ using namespace std;
 // Command class with herited classes with or without content
 InputHandling::InputHandling(string input) {
     input_ = input;
-    CommandList_ = {"fd", "turn", "repeat", "clear"};
+    CommandList_ = {"fd", "turn", "repeat", "cpen"};
     CommandWithParamList_ = {"fd", "turn", "repeat"};
 }
 
