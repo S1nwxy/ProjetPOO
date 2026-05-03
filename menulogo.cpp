@@ -63,7 +63,6 @@ void MenuLogo::printHelp(const std::vector<CommandHelp>& commands, int colWidth)
     }
 }
 
-
 bool MenuLogo::newProgram(int) {
     printHelp(commands);
     string program;
@@ -76,11 +75,11 @@ bool MenuLogo::newProgram(int) {
 
 bool MenuLogo::executeProgram(int) {
     turtle_->drawer()->beginDraw("logo.html");
-    /*
-    for(auto line : hist_->lines()){
-        drawer_->drawLine(line.x1, line.y1, line.x2, line.y2);
+    
+    for(auto line : turtle_ -> hist() -> lines()){
+        turtle_-> drawer() -> drawLine(line.x1, line.y1, line.x2, line.y2);
     }
-        */ // doesnt work for now 
+    
     program_->parse();
     cout << program_->input() << endl;
     for(const auto& cmd : program_->result()) {

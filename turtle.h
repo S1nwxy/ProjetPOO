@@ -27,6 +27,7 @@ class Turtle{
     void angleAt(double angle) { angle_ = angle; };
 
     SvgDrawer* drawer() {return drawer_;};
+    CommandHistory* hist() {return hist_;};
 
 
     void step(int amount); // gere la logique de dessin
