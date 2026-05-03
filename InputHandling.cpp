@@ -4,6 +4,8 @@
 #include "command.h"
 using namespace std;
 
+// Explanations & authorship in the header file
+
 InputHandling::InputHandling(string input) {
     input_ = input;
     CommandList_ = {"fd", "turn", "repeat", "cpen"};

@@ -1,10 +1,11 @@
 #pragma once
 #include <string>
 
-// Author : both
+// Author : Axel
 
 // this file contains the Pen class, that represents the state of the pen (active or not, size, color...)
 // right now only the state is implemented
+
 class Pen {
     bool state_;
 

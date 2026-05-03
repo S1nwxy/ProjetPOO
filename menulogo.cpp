@@ -8,9 +8,9 @@
 #include "svgdrawer.h"
 #include "InputHandling.h"
 
-using namespace std;
+// Explanations & authorship in the header file
 
-// Author : Johann
+using namespace std;
 
 std::vector<CommandHelp> commands = {
     { "fd number",   { "Move the turtle forward by the amount specified by number",
