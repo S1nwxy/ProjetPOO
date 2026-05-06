@@ -16,8 +16,8 @@ Turtle::Turtle(){
 }
 
 void Turtle::step(int amount){
-    int newx = x_ + amount * cos(angle_);
-    int newy = y_ + amount * sin(angle_);
+    double newx = x_ + amount * cos(angle_);
+    double newy = y_ + amount * sin(angle_);
     if(pen_->isActive()){ // handles logic ; if pen is down, draw and send to the command history
         drawer_->drawLine(x_, y_, newx, newy);
         hist_->addLine(x_, y_, newx, newy);
